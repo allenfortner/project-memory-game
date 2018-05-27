@@ -37,6 +37,11 @@ function shuffle(array) {
     return array;
 }
 
+//Generate new deck when the DOM is loaded
+$(document).ready(function() {
+    generateDeck();
+	//console.log("Deck has been generated!");
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:
