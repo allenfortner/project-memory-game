@@ -14,7 +14,7 @@ const oneStar = 28;
 
 //Create card element and add HTML inside the deck
  function createCard(cardClass) {
-	deck.append(`<li class="card match"><i class="${cardClass}"></i></li>`);
+	deck.append(`<li class="card"><i class="${cardClass}"></i></li>`);
  }
  
  //Shuffles card list, creates each card, and adds their HTML to the page
