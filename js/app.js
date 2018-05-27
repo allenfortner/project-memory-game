@@ -5,23 +5,19 @@
  
  let deck = $(".deck");
  
-//Initialize Variables
+//Declare variables
 let moves = 0;
 let seconds = 0;
 const twoStars = 20;
 const oneStar = 28;
 
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+//Create card element and add HTML inside the deck
  function createCard(cardClass) {
 	deck.append(`<li class="card match"><i class="${cardClass}"></i></li>`);
  }
  
+ //Shuffles card list, creates each card, and adds their HTML to the page
  function generateDeck() {
     shuffle(cards).forEach(createCard);
  }
