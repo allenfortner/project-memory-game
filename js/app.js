@@ -1,11 +1,9 @@
-/*
- * Create a list that holds all of your cards
- */
- let cards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb"]
- 
- let deck = $(".deck");
- 
 //Declare variables
+let cards = ["fa fa-diamond", "fa fa-diamond", "fa fa-paper-plane-o", "fa fa-paper-plane-o", "fa fa-anchor", "fa fa-anchor", "fa fa-bolt", "fa fa-bolt", "fa fa-cube", "fa fa-cube", "fa fa-leaf", "fa fa-leaf", "fa fa-bicycle", "fa fa-bicycle", "fa fa-bomb", "fa fa-bomb"]
+ 
+let deck = $(".deck");
+let card = $(".card");
+ 
 let moves = 0;
 let seconds = 0;
 const twoStars = 20;
@@ -41,6 +39,7 @@ function shuffle(array) {
 $(document).ready(function() {
     generateDeck();
 	//console.log("Deck has been generated!");
+	$(".card").click(flipCard);
 });
 
 /*
@@ -53,3 +52,7 @@ $(document).ready(function() {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+function flipCard() {
+    $(this).addClass("open show");
+}
