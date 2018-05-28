@@ -1,0 +1,29 @@
+@media screen and (max-width: 325px) {
+	h1 {
+		font-size: 10vw;
+	}
+	
+	.score-panel {
+		font-size: 5vw;
+	}
+}
+
+@media screen and (max-width: 676px) {
+	.deck {
+		width: 95%;
+		height: 20vw;
+		box-sizing: border-box;
+		padding: 10px 10px;
+		min-height: 100vw;
+		max-height: 100vw;
+	}
+	
+	.deck .card {
+		width: 20vw;
+		height: 20vw;
+	}
+	
+	.score-panel {
+		width: 75%;
+	}
+}
