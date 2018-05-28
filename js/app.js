@@ -82,8 +82,8 @@ function checkCards() {
 		canSelect = false; //Player can't select a card right after two are picked
 		if (openCardClasses[0] == openCardClasses[1]) {
 			console.log("You got a match!")
-			openCards[0].toggleClass("open show match"); //Change first card to "match" class and remove "open" and "show" classes
-			openCards[1].toggleClass("open show match"); //Change second card to "match" class and remove "open" and "show" classes
+			openCards[0].toggleClass("open show match shake"); //Change first card to "match" class, remove "open" and "show" classes, and add shake class
+			openCards[1].toggleClass("open show match shake"); //Change second card to "match" class, remove "open" and "show" classes, and add shake class
 			
 			openCards = []; //Reset openCards list
 			openCardClasses = []; //Reset openCardClasses list
@@ -99,10 +99,11 @@ function checkCards() {
 			}
 		} else {
 			console.log("Not a match...")
-			
+			openCards[0].addClass("shake");
+			openCards[1].addClass("shake");
 			setTimeout(function() {
-				openCards[0].toggleClass("open show"); //Remove "open" and "show" classes from first card
-				openCards[1].toggleClass("open show"); //Remove "open" and "show" classes from second card
+				openCards[0].toggleClass("open show shake"); //Remove "open" and "show" classes from first card, as well as reset "shake" class
+				openCards[1].toggleClass("open show shake"); //Remove "open" and "show" classes from second card, as well as reset "shake" class
 				
 				openCards = []; //Reset openCards list
 				openCardClasses = []; //Reset openCardClasses list
