@@ -60,33 +60,40 @@ function flipCard() {
 		openCards.push($(this)); //Adds the clicked card into openCards list
 		openCardClasses.push($(this).children().attr("class")); //Adds the clicked card's image into openCardClasses list
 		checkCards();
+		
+		moves += 1;
+		if (moves == 1) {
+			$(".moves").text(moves + " Move");
+		} else {
+			$(".moves").text(moves + " Moves");
+		}
 	}
 }
 
 function checkCards() {
 	if (openCardClasses.length == 2) {
-		canSelect = false;
+		canSelect = false; //Player can't select a card right after two are picked
 		if (openCardClasses[0] == openCardClasses[1]) {
 			console.log("You got a match!")
-			openCards[0].toggleClass("open show match");
-			openCards[1].toggleClass("open show match");
+			openCards[0].toggleClass("open show match"); //Change first card to "match" class and remove "open" and "show" classes
+			openCards[1].toggleClass("open show match"); //Change second card to "match" class and remove "open" and "show" classes
 			
-			openCards = [];
-			openCardClasses = [];
-			canSelect = true;
+			openCards = []; //Reset openCards list
+			openCardClasses = []; //Reset openCardClasses list
+			canSelect = true; //Player can now select another card
 		} else {
 			console.log("Not a match...")
 			
 			setTimeout(function() {
-				openCards[0].toggleClass("open show");
-				openCards[1].toggleClass("open show");
+				openCards[0].toggleClass("open show"); //Remove "open" and "show" classes from first card
+				openCards[1].toggleClass("open show"); //Remove "open" and "show" classes from second card
 				
-				openCards = [];
-				openCardClasses = [];
-				canSelect = true;
+				openCards = []; //Reset openCards list
+				openCardClasses = []; //Reset openCardClasses list
+				canSelect = true; //Player can now select another card (after a 1 second delay)
 			}, 1000);
 		}
 	} else {
-        $(this).addClass("open show");
+        $(this).addClass("open show"); //Add "open" and "show" classes to the first open card selected
 	}
 }
