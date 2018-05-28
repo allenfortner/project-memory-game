@@ -11,8 +11,9 @@ let seconds = 0; //Number of seconds since game began
 let timer; //Initialize timer variable for later use
 let canSelect = true; //Used to prevent users from selecting cards during timeout after wrong match
 let started = false; //Whether the game has begun (first card clicked) or not, used for the timer
-const twoStars = 20; //Limit for 3-star score
-const oneStar = 28; //Limit for 2-star score
+let score = 3; //Score starts at 3 by default (three stars) and decreases after a certain amount of moves (see below)
+const twoStars = 9; //Limit for 3-star score, after this you get a two star score
+const oneStar = 16; //Limit for 2-star score, after this you get a one star score
 
 //Create card element and add HTML inside the deck
 function createCard(cardClass) {
@@ -112,12 +113,14 @@ function addMove() {
 	} else {
 		$(".moves").text(moves + " Moves");
 	}
+	calculateScore(); //Calculates score each move
 }
 
 function gameRestart() {
 	//Empty deck and then generate a new one
 	$(".deck").empty();
 	generateDeck();
+	
 	//Reset variables
 	openCards = [];
 	openCardClasses = [];
@@ -126,11 +129,14 @@ function gameRestart() {
 	canSelect = true;
 	started = false;
 	$(".card").click(flipCard);
+	
 	//Reset moves counter
 	$(".moves").text(moves + " Moves");
 	//Reset timer
 	$(".timer").text(seconds + " Seconds");
 	stopTimer();
+	//Reset score
+	resetScore();
 }
 
 function timerFunction() {
@@ -151,4 +157,22 @@ function startTimer() {
 
 function stopTimer() {
 	clearInterval(timer);
+}
+
+function calculateScore() {
+	if (moves > twoStars && moves <= oneStar) {
+		score = 2 //Score is now two stars
+		$("#star3").css("visibility", "hidden"); //Hide the third star
+	} else if (moves > oneStar) {
+		score = 1; //Score is now one star
+		$("#star2").css("visibility", "hidden"); //Hide the second star
+	} else {
+		score = 3
+	}
+}
+
+function resetScore() {
+	score = 3;
+	$("#star2").css("visibility", "visible");
+	$("#star3").css("visibility", "visible");
 }
