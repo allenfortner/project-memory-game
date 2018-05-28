@@ -7,6 +7,7 @@ let card = $(".card");
 let openCards = []; //Contains currently open cards, cleared after two are selected [see flipCard() and checkCards()]
 let openCardClasses = []; //Contains card picture classes, compared to check if cards match, cleared after two are selected [see flipCard() and checkCards()]
 let moves = 0; //Number of moves that have been made
+let matches = 0; //Number of matches made so far
 let seconds = 0; //Number of seconds since game began
 let timer; //Initialize timer variable for later use
 let canSelect = true; //Used to prevent users from selecting cards during timeout after wrong match
@@ -88,6 +89,14 @@ function checkCards() {
 			openCardClasses = []; //Reset openCardClasses list
 			canSelect = true; //Player can now select another card
 			addMove();
+			matches += 1;
+			console.log(matches);
+			
+			//Check to see if the game has been won (all eight matches made)
+			if (matches === 8) {
+				openModal();
+				stopTimer();
+			}
 		} else {
 			console.log("Not a match...")
 			
@@ -142,7 +151,6 @@ function gameRestart() {
 function timerFunction() {
 	if (started == true) {
 		seconds += 1;
-		console.log(seconds);
 		if (seconds == 1) {
 			$(".timer").text(seconds + " Second");
 		} else {
@@ -162,10 +170,10 @@ function stopTimer() {
 function calculateScore() {
 	if (moves > twoStars && moves <= oneStar) {
 		score = 2 //Score is now two stars
-		$("#star3").css("visibility", "hidden"); //Hide the third star
+		$(".star3").css("display", "none"); //Hide the third star
 	} else if (moves > oneStar) {
 		score = 1; //Score is now one star
-		$("#star2").css("visibility", "hidden"); //Hide the second star
+		$(".star2").css("display", "none"); //Hide the second star
 	} else {
 		score = 3
 	}
@@ -173,6 +181,31 @@ function calculateScore() {
 
 function resetScore() {
 	score = 3;
-	$("#star2").css("visibility", "visible");
-	$("#star3").css("visibility", "visible");
+	$(".star2").css("display", "inline-block");
+	$(".star3").css("display", "inline-block");
 }
+
+//Modal Configuration (Modified from https://www.w3schools.com/howto/howto_css_modals.asp)
+
+var modal = $("#modal");
+var modalCloseBtn = $(".close")[0];
+var tryAgainBtn = $(".try-again");
+
+function openModal() {
+    modal.css("display", "block");
+}
+
+modalCloseBtn.onclick = function() {
+    modal.css("display", "none");
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.css("display", "none");
+    }
+}
+
+tryAgainBtn.click(function() {
+	modal.css("display", "none");
+	gameRestart();
+});
