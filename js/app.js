@@ -81,7 +81,7 @@ function checkCards() {
 	if (openCardClasses.length == 2) {
 		canSelect = false; //Player can't select a card right after two are picked
 		if (openCardClasses[0] == openCardClasses[1]) {
-			console.log("You got a match!")
+			//console.log("You got a match!")
 			openCards[0].toggleClass("open show match shake"); //Change first card to "match" class, remove "open" and "show" classes, and add shake class
 			openCards[1].toggleClass("open show match shake"); //Change second card to "match" class, remove "open" and "show" classes, and add shake class
 			
@@ -90,7 +90,7 @@ function checkCards() {
 			canSelect = true; //Player can now select another card
 			addMove();
 			matches += 1;
-			console.log(matches);
+			//console.log(matches);
 			
 			//Check to see if the game has been won (all eight matches made)
 			if (matches === 8) {
@@ -98,7 +98,7 @@ function checkCards() {
 				stopTimer();
 			}
 		} else {
-			console.log("Not a match...")
+			//console.log("Not a match...")
 			openCards[0].addClass("shake");
 			openCards[1].addClass("shake");
 			setTimeout(function() {
