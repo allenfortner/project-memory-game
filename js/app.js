@@ -64,13 +64,7 @@ function flipCard() {
 			openCards.push($(this)); //Adds the clicked card into openCards list
 			openCardClasses.push($(this).children().attr("class")); //Adds the clicked card's image into openCardClasses list
 			checkCards();
-			
-			moves += 1;
-			if (moves == 1) {
-				$(".moves").text(moves + " Move");
-			} else {
-				$(".moves").text(moves + " Moves");
-			}
+			addMove();
 		}
 	}
 }
@@ -100,5 +94,14 @@ function checkCards() {
 		}
 	} else {
         $(this).addClass("open show"); //Add "open" and "show" classes to the first open card selected
+	}
+}
+
+function addMove() {
+	moves += 1;
+	if (moves == 1) {
+		$(".moves").text(moves + " Move");
+	} else {
+		$(".moves").text(moves + " Moves");
 	}
 }
