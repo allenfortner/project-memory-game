@@ -64,7 +64,6 @@ function flipCard() {
 			openCards.push($(this)); //Adds the clicked card into openCards list
 			openCardClasses.push($(this).children().attr("class")); //Adds the clicked card's image into openCardClasses list
 			checkCards();
-			addMove();
 		}
 	}
 }
@@ -80,6 +79,7 @@ function checkCards() {
 			openCards = []; //Reset openCards list
 			openCardClasses = []; //Reset openCardClasses list
 			canSelect = true; //Player can now select another card
+			addMove();
 		} else {
 			console.log("Not a match...")
 			
@@ -91,6 +91,7 @@ function checkCards() {
 				openCardClasses = []; //Reset openCardClasses list
 				canSelect = true; //Player can now select another card (after a 1 second delay)
 			}, 1000);
+			addMove();
 		}
 	} else {
         $(this).addClass("open show"); //Add "open" and "show" classes to the first open card selected
