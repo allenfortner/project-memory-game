@@ -56,16 +56,21 @@ $(document).ready(function() {
 
 function flipCard() {
 	if (canSelect == true){
-		$(this).addClass("open show"); //"Flips" over the card
-		openCards.push($(this)); //Adds the clicked card into openCards list
-		openCardClasses.push($(this).children().attr("class")); //Adds the clicked card's image into openCardClasses list
-		checkCards();
-		
-		moves += 1;
-		if (moves == 1) {
-			$(".moves").text(moves + " Move");
+		//The if statement below checks to see if you're clicking on the same card again
+		if ($(this).hasClass("open") || $(this).hasClass("match")) {
+			//console.log("Nothing happens!");
 		} else {
-			$(".moves").text(moves + " Moves");
+			$(this).addClass("open show"); //"Flips" over the card
+			openCards.push($(this)); //Adds the clicked card into openCards list
+			openCardClasses.push($(this).children().attr("class")); //Adds the clicked card's image into openCardClasses list
+			checkCards();
+			
+			moves += 1;
+			if (moves == 1) {
+				$(".moves").text(moves + " Move");
+			} else {
+				$(".moves").text(moves + " Moves");
+			}
 		}
 	}
 }
