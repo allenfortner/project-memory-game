@@ -41,6 +41,7 @@ function shuffle(array) {
 $(document).ready(function() {
     generateDeck();
 	$(".card").click(flipCard);
+	$(".restart").click(gameRestart);
 });
 
 /*
@@ -105,4 +106,19 @@ function addMove() {
 	} else {
 		$(".moves").text(moves + " Moves");
 	}
+}
+
+function gameRestart() {
+	//Empty deck and then generate a new one
+	$(".deck").empty();
+	generateDeck();
+	//Reset variables
+	openCards = [];
+	openCardClasses = [];
+	moves = 0;
+	seconds = 0;
+	canSelect = true;
+	$(".card").click(flipCard);
+	//Reset moves counter
+	$(".moves").text(moves + " Moves");
 }
