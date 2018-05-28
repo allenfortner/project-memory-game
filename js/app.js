@@ -8,7 +8,9 @@ let openCards = []; //Contains currently open cards, cleared after two are selec
 let openCardClasses = []; //Contains card picture classes, compared to check if cards match, cleared after two are selected [see flipCard() and checkCards()]
 let moves = 0; //Number of moves that have been made
 let seconds = 0; //Number of seconds since game began
+let timer; //Initialize timer variable for later use
 let canSelect = true; //Used to prevent users from selecting cards during timeout after wrong match
+let started = false; //Whether the game has begun (first card clicked) or not, used for the timer
 const twoStars = 20; //Limit for 3-star score
 const oneStar = 28; //Limit for 2-star score
 
@@ -66,6 +68,10 @@ function flipCard() {
 			openCardClasses.push($(this).children().attr("class")); //Adds the clicked card's image into openCardClasses list
 			checkCards();
 		}
+		if (started == false) {
+			started = true;
+			startTimer();
+		}
 	}
 }
 
@@ -118,7 +124,31 @@ function gameRestart() {
 	moves = 0;
 	seconds = 0;
 	canSelect = true;
+	started = false;
 	$(".card").click(flipCard);
 	//Reset moves counter
 	$(".moves").text(moves + " Moves");
+	//Reset timer
+	$(".timer").text(seconds + " Seconds");
+	stopTimer();
+}
+
+function timerFunction() {
+	if (started == true) {
+		seconds += 1;
+		console.log(seconds);
+		if (seconds == 1) {
+			$(".timer").text(seconds + " Second");
+		} else {
+			$(".timer").text(seconds + " Seconds");
+		}
+	}
+};
+
+function startTimer() {
+	timer = setInterval(timerFunction, 1000);
+}
+
+function stopTimer() {
+	clearInterval(timer);
 }
